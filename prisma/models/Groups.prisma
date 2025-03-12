@@ -7,5 +7,8 @@ model GROUPS {
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
   deleted_at DateTime?
+  
   user USERS @relation(fields: [user_id_user], references: [id])
+  USER_GROUPS USER_GROUPS[]
+  USER_GROUP_CASE_FILES USER_GROUP_CASE_FILES[]
 }

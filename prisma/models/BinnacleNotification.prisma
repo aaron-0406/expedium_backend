@@ -1,0 +1,21 @@
+model BINNACLE_NOTIFICATION {
+  id Int @id @default(autoincrement())
+  binnacle_id_binnacle Int
+  notification_code String @db.VarChar(45)
+  addressee String @db.VarChar(200)
+  ship_date DateTime
+  attachments String @db.VarChar(200)
+  delivery_method String @db.VarChar(200)
+  resolution_date DateTime
+  notification_print DateTime
+  sent_central DateTime
+  central_receipt DateTime
+  notification_to_recipient_on DateTime
+  charge_returned_to_court_on DateTime
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  deleted_at DateTime?
+
+  BINNACLES BINNACLES @relation(fields: [binnacle_id_binnacle], references: [id])
+}

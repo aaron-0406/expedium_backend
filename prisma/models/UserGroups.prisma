@@ -1,0 +1,7 @@
+model USER_GROUPS{
+  id Int @id @default(autoincrement())
+  user_id String
+  group_id Int
+  USERS USERS @relation(fields: [user_id], references: [id])
+  GROUPS GROUPS @relation(fields: [group_id], references: [id])
+}
