@@ -1,0 +1,11 @@
+
+model GROUPS {
+  id Int @id @default(autoincrement())
+  user_id_user String
+  name String
+  description String
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  deleted_at DateTime?
+  user USERS @relation(fields: [user_id_user], references: [id])
+}

@@ -1,0 +1,19 @@
+model USERS {
+  id        String   @id @default(uuid())
+  first_name String
+  last_name String?
+  password  String?
+  email     String?  @unique
+  is_active Int?
+  phone     String?
+  profile_pic String?
+  document_id Int?
+  rol_id    String?
+  created_at DateTime? @default(now())
+  updated_at DateTime?
+  deleted_at DateTime?
+  plan_id_plan Int?
+  PLANS     PLANS?   @relation(fields: [plan_id_plan], references: [id])
+  ROLES     ROLES?   @relation(fields: [rol_id], references: [id])
+  GROUPS    GROUPS[]
+}
