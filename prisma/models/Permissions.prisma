@@ -1,0 +1,16 @@
+model PERMISSIONS {
+  id        Int      @id @default(autoincrement())
+  name      String
+  code      String   @unique
+  icon      String
+  url       String?
+  id_permission_main Int?
+  is_dropdown Int?
+  position   Int?
+  created_at DateTime? @default(now())
+  updated_at DateTime?
+  deleted_at DateTime?
+  ROLES     ROLES[]
+  ROLE_PERMISSION ROLE_PERMISSION[]
+  PLANS_PERMISSIONS PLANS_PERMISSIONS[]
+}
