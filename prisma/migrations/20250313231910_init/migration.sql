@@ -1,0 +1,251 @@
+-- CreateTable
+CREATE TABLE `BINNACLE_NOTIFICATION` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `binnacle_id_binnacle` INTEGER NOT NULL,
+    `notification_code` VARCHAR(45) NOT NULL,
+    `addressee` VARCHAR(200) NOT NULL,
+    `ship_date` DATETIME(3) NOT NULL,
+    `attachments` VARCHAR(200) NOT NULL,
+    `delivery_method` VARCHAR(200) NOT NULL,
+    `resolution_date` DATETIME(3) NOT NULL,
+    `notification_print` DATETIME(3) NOT NULL,
+    `sent_central` DATETIME(3) NOT NULL,
+    `central_receipt` DATETIME(3) NOT NULL,
+    `notification_to_recipient_on` DATETIME(3) NOT NULL,
+    `charge_returned_to_court_on` DATETIME(3) NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `BINNACLES` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `last_performed` LONGTEXT NOT NULL,
+    `case_file_id_case_file` INTEGER NOT NULL,
+    `index` INTEGER NOT NULL,
+    `resolution_date` DATETIME(3) NOT NULL,
+    `entry_date` DATETIME(3) NOT NULL,
+    `notification_type` VARCHAR(45) NOT NULL,
+    `acto` VARCHAR(200) NOT NULL,
+    `fojas` INTEGER NOT NULL,
+    `folios` INTEGER NOT NULL,
+    `provedio_date` DATETIME(3) NOT NULL,
+    `created_by` VARCHAR(45) NOT NULL,
+    `user_description` LONGTEXT NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `CASE_FILES` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `code` VARCHAR(45) NOT NULL,
+    `jurisdictional_body` VARCHAR(45) NOT NULL,
+    `judicial_district` VARCHAR(45) NOT NULL,
+    `judge` VARCHAR(100) NOT NULL,
+    `legal_specialist` VARCHAR(100) NOT NULL,
+    `process_type` VARCHAR(45) NOT NULL,
+    `observation` VARCHAR(1000) NOT NULL,
+    `speciality` VARCHAR(45) NOT NULL,
+    `matters` VARCHAR(45) NOT NULL,
+    `status` VARCHAR(45) NOT NULL,
+    `procedural_stage` VARCHAR(45) NOT NULL,
+    `location` VARCHAR(45) NOT NULL,
+    `conclusion_reason` VARCHAR(45) NOT NULL,
+    `sumary` VARCHAR(1000) NOT NULL,
+    `conclusion_date` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `start_date` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `GROUPS` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `user_id_user` VARCHAR(191) NOT NULL,
+    `name` VARCHAR(191) NOT NULL,
+    `description` VARCHAR(191) NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `PERMISSIONS` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NOT NULL,
+    `code` VARCHAR(191) NOT NULL,
+    `icon` VARCHAR(191) NOT NULL,
+    `url` VARCHAR(191) NULL,
+    `id_permission_main` INTEGER NULL,
+    `is_dropdown` INTEGER NULL,
+    `position` INTEGER NULL,
+    `created_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NULL,
+    `deleted_at` DATETIME(3) NULL,
+
+    UNIQUE INDEX `PERMISSIONS_code_key`(`code`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `PLANS` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NULL,
+    `price` DOUBLE NULL,
+    `description` VARCHAR(191) NULL,
+    `created_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `deleted_at` DATETIME(3) NULL,
+    `updated_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `PLANS_PERMISSIONS` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `permission_id_permission` INTEGER NOT NULL,
+    `plan_id_plan` INTEGER NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `ROLE_PERMISSION` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `rol_id` VARCHAR(191) NOT NULL,
+    `permission_id` INTEGER NOT NULL,
+    `created_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NULL,
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `ROLES` (
+    `id` VARCHAR(191) NOT NULL,
+    `name` VARCHAR(191) NULL,
+    `description` VARCHAR(191) NULL,
+    `icon` VARCHAR(191) NULL,
+    `created_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NULL,
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `USER_GROUP_CASE_FILES` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `user_id_user` VARCHAR(191) NOT NULL,
+    `group_id_group` INTEGER NOT NULL,
+    `case_file_id_case_file` INTEGER NOT NULL,
+    `privacity` BOOLEAN NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `USER_GROUPS` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `user_id` VARCHAR(191) NOT NULL,
+    `group_id` INTEGER NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `USERS` (
+    `id` VARCHAR(191) NOT NULL,
+    `first_name` VARCHAR(191) NOT NULL,
+    `last_name` VARCHAR(191) NULL,
+    `password` VARCHAR(191) NULL,
+    `email` VARCHAR(191) NULL,
+    `is_active` INTEGER NULL,
+    `phone` VARCHAR(191) NULL,
+    `profile_pic` VARCHAR(191) NULL,
+    `document_id` INTEGER NULL,
+    `rol_id` VARCHAR(191) NULL,
+    `plan_id_plan` INTEGER NULL,
+    `created_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NULL,
+    `deleted_at` DATETIME(3) NULL,
+
+    UNIQUE INDEX `USERS_email_key`(`email`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `_PERMISSIONSToROLES` (
+    `A` INTEGER NOT NULL,
+    `B` VARCHAR(191) NOT NULL,
+
+    UNIQUE INDEX `_PERMISSIONSToROLES_AB_unique`(`A`, `B`),
+    INDEX `_PERMISSIONSToROLES_B_index`(`B`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `BINNACLE_NOTIFICATION` ADD CONSTRAINT `BINNACLE_NOTIFICATION_binnacle_id_binnacle_fkey` FOREIGN KEY (`binnacle_id_binnacle`) REFERENCES `BINNACLES`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `BINNACLES` ADD CONSTRAINT `BINNACLES_case_file_id_case_file_fkey` FOREIGN KEY (`case_file_id_case_file`) REFERENCES `CASE_FILES`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `GROUPS` ADD CONSTRAINT `GROUPS_user_id_user_fkey` FOREIGN KEY (`user_id_user`) REFERENCES `USERS`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `PLANS_PERMISSIONS` ADD CONSTRAINT `PLANS_PERMISSIONS_permission_id_permission_fkey` FOREIGN KEY (`permission_id_permission`) REFERENCES `PERMISSIONS`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `PLANS_PERMISSIONS` ADD CONSTRAINT `PLANS_PERMISSIONS_plan_id_plan_fkey` FOREIGN KEY (`plan_id_plan`) REFERENCES `PLANS`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `ROLE_PERMISSION` ADD CONSTRAINT `ROLE_PERMISSION_rol_id_fkey` FOREIGN KEY (`rol_id`) REFERENCES `ROLES`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `ROLE_PERMISSION` ADD CONSTRAINT `ROLE_PERMISSION_permission_id_fkey` FOREIGN KEY (`permission_id`) REFERENCES `PERMISSIONS`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `USER_GROUP_CASE_FILES` ADD CONSTRAINT `USER_GROUP_CASE_FILES_user_id_user_fkey` FOREIGN KEY (`user_id_user`) REFERENCES `USERS`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `USER_GROUP_CASE_FILES` ADD CONSTRAINT `USER_GROUP_CASE_FILES_group_id_group_fkey` FOREIGN KEY (`group_id_group`) REFERENCES `GROUPS`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `USER_GROUP_CASE_FILES` ADD CONSTRAINT `USER_GROUP_CASE_FILES_case_file_id_case_file_fkey` FOREIGN KEY (`case_file_id_case_file`) REFERENCES `CASE_FILES`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `USER_GROUPS` ADD CONSTRAINT `USER_GROUPS_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `USERS`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `USER_GROUPS` ADD CONSTRAINT `USER_GROUPS_group_id_fkey` FOREIGN KEY (`group_id`) REFERENCES `GROUPS`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `USERS` ADD CONSTRAINT `USERS_plan_id_plan_fkey` FOREIGN KEY (`plan_id_plan`) REFERENCES `PLANS`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `USERS` ADD CONSTRAINT `USERS_rol_id_fkey` FOREIGN KEY (`rol_id`) REFERENCES `ROLES`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `_PERMISSIONSToROLES` ADD CONSTRAINT `_PERMISSIONSToROLES_A_fkey` FOREIGN KEY (`A`) REFERENCES `PERMISSIONS`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `_PERMISSIONSToROLES` ADD CONSTRAINT `_PERMISSIONSToROLES_B_fkey` FOREIGN KEY (`B`) REFERENCES `ROLES`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
