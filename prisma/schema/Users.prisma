@@ -1,24 +1,33 @@
 model USERS {
-  id        String   @id @default(uuid())
-  first_name String
-  last_name String?
-  password  String?
-  email     String?  @unique
-  is_active Int?
-  phone     String?
-  profile_pic String?
-  document_id Int?
-  rol_id    String?
+  id           String  @id @default(uuid())
+  first_name   String
+  last_name    String?
+  password     String?
+  email        String? @unique
+  is_active    Int?
+  phone        String?
+  profile_pic  String?
+  document_id  Int?
+  rol_id       String?
   plan_id_plan Int?
 
   created_at DateTime? @default(now())
   updated_at DateTime?
   deleted_at DateTime?
 
-  PLANS     PLANS?   @relation(fields: [plan_id_plan], references: [id])
-  ROLES     ROLES?   @relation(fields: [rol_id], references: [id])
+  PLANS PLANS? @relation(fields: [plan_id_plan], references: [id])
+  ROLES ROLES? @relation(fields: [rol_id], references: [id])
 
-  GROUPS    GROUPS[]
-  USER_GROUPS USER_GROUPS[]
+  GROUPS                GROUPS[]
+  USER_GROUPS           USER_GROUPS[]
   USER_GROUP_CASE_FILES USER_GROUP_CASE_FILES[]
+
+  MESSAGES_SENT     MESSAGES[] @relation("SenderMessages")
+  MESSAGES_RECEIVED MESSAGES[] @relation("ReceiverMessages")
+
+  CONNECTIONS_REQUESTED  CONNECTIONS[] @relation("RequestedUsers")
+  CONNECTIONS_REQUESTING CONNECTIONS[] @relation("RequestingUsers")
+
+  REACTIONS POSTS_COMMENTS_REACTIONS[] @relation("UserReactions")
+  POSTS     POSTS[] @relation("UserPosts")
 }

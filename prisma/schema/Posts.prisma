@@ -1,0 +1,13 @@
+model POSTS {
+  id           String @id @default(uuid())
+  title        String @db.VarChar(45)
+  description  String @db.LongText
+  image        String @db.VarChar(45)
+  user_id_user String
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now())
+  deleted_at DateTime?
+
+  USERS USERS @relation("UserPosts", fields: [user_id_user], references: [id])
+}

@@ -1,12 +1,12 @@
 model ROLES {
-  id        String   @id @default(uuid())
-  name      String?
-  description String?
-  icon      String?
-  created_at DateTime? @default(now())
-  updated_at DateTime?
-  deleted_at DateTime?
-  USERS     USERS[]
-  PERMISSIONS PERMISSIONS[]
+  id              String            @id @default(uuid())
+  name            String?
+  description     String?
+  icon            String?
+  created_at      DateTime?         @default(now())
+  updated_at      DateTime?
+  deleted_at      DateTime?
+  USERS           USERS[]
+  PERMISSIONS     PERMISSIONS[]
   ROLE_PERMISSION ROLE_PERMISSION[]
 }
