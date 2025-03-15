@@ -3,10 +3,13 @@ model ROLES {
   name            String?
   description     String?
   icon            String?
+  USERS           USERS[]
+  PERMISSIONS     PERMISSIONS[]
+
   created_at      DateTime?         @default(now())
   updated_at      DateTime?
   deleted_at      DateTime?
-  USERS           USERS[]
-  PERMISSIONS     PERMISSIONS[]
+
   ROLE_PERMISSION ROLE_PERMISSION[]
+  COMMUNITY_MEMBERS COMMUNITY_MEMBERS[] @relation("CommunityMembersRoles")
 }

@@ -29,5 +29,12 @@ model USERS {
   CONNECTIONS_REQUESTING CONNECTIONS[] @relation("RequestingUsers")
 
   REACTIONS POSTS_COMMENTS_REACTIONS[] @relation("UserReactions")
-  POSTS     POSTS[] @relation("UserPosts")
+  POSTS     POSTS[]                    @relation("UserPosts")
+  COMMENTS  COMMENTS[]                 @relation("UserComments")
+
+  COMMUNITY_MEMBERS COMMUNITY_MEMBERS[] @relation("Members")
+  COMMUNITIES       COMMUNITIES[]       @relation("UserCreatorCommunity")
+
+  EVENTS          EVENTS[]          @relation("UserCreator")
+  EVENT_ATTENDEES EVENT_ATTENDEES[] @relation("UserEventAttendees")
 }
