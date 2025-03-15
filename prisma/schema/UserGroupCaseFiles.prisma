@@ -1,14 +1,14 @@
 model USER_GROUP_CASE_FILES {
-  id Int @id @default(autoincrement()) 
-  user_id_user String
-  group_id_group Int
+  id                     Int       @id @default(autoincrement())
+  user_id_user           String
+  group_id_group         Int
   case_file_id_case_file Int
-  privacity Boolean
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now())
-  deleted_at DateTime?
+  privacity              Boolean
+  created_at             DateTime  @default(now())
+  updated_at             DateTime  @default(now())
+  deleted_at             DateTime?
 
-  USERS USERS @relation(fields: [user_id_user], references: [id])
-  GROUPS GROUPS @relation(fields: [group_id_group], references: [id])
+  USERS      USERS      @relation(fields: [user_id_user], references: [id])
+  GROUPS     GROUPS     @relation(fields: [group_id_group], references: [id])
   CASE_FILES CASE_FILES @relation(fields: [case_file_id_case_file], references: [id])
 }

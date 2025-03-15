@@ -1,0 +1,11 @@
+model POST_TYPE {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(45)
+  description String @db.LongText
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  deleted_at DateTime?
+
+  POSTS POSTS[] @relation("PostType")
+}

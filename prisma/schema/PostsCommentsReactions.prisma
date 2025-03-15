@@ -1,0 +1,12 @@
+model POSTS_COMMENTS_REACTIONS {
+  id                             String @id @default(uuid())
+  type_reaction_id_type_reaction Int
+  user_id_user                   String
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now())
+  deleted_at DateTime?
+
+  TYPE_REACTION TYPE_REACTION @relation("TypeReaction", fields: [type_reaction_id_type_reaction], references: [id])
+  USERS         USERS         @relation("UserReactions", fields: [user_id_user], references: [id])
+}

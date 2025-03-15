@@ -1,0 +1,14 @@
+model EVENT_TYPE {
+  id          Int    @id @default(autoincrement())
+  name        String @db.VarChar(45)
+  description String @db.LongText
+  color       String @db.VarChar(45)
+  icon        String @db.VarChar(45)
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now())
+  deleted_at DateTime?
+
+  EVENTS EVENTS[] @relation("EventType")
+
+}

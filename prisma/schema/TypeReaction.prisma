@@ -1,0 +1,13 @@
+model TYPE_REACTION {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(45)
+  description String @db.LongText
+  color String @db.VarChar(45)
+  icon String @db.VarChar(45)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  deleted_at DateTime?
+
+  POSTS_COMMENTS_REACTIONS POSTS_COMMENTS_REACTIONS[] @relation("TypeReaction")
+}

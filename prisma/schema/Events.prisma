@@ -1,0 +1,21 @@
+model EVENTS {
+  id                     Int    @id @default(autoincrement())
+  name                   String @db.VarChar(45)
+  description            String @db.LongText
+  color                  String @db.VarChar(45)
+  icon                   String @db.VarChar(45)
+  type_id_type           Int
+  privacity_id_privacity Int
+  community_id_community String
+  creator_id_creator     String
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now())
+  deleted_at DateTime?
+
+  EVENT_TYPE      EVENT_TYPE        @relation("EventType", fields: [type_id_type], references: [id])
+  PRIVACITY       PRIVACITY         @relation("EventPrivacity", fields: [privacity_id_privacity], references: [id])
+  COMMUNITIES     COMMUNITIES       @relation("CommunitiyEvents", fields: [community_id_community], references: [id])
+  USERS           USERS             @relation("UserCreator", fields: [creator_id_creator], references: [id])
+  EVENT_ATTENDEES EVENT_ATTENDEES[] @relation("EventAttendees")
+}
