@@ -11,6 +11,7 @@ import { LoginDto } from '../dto/auth.dto';
 @Injectable()
 export class LocalAuthGuard extends AuthGuard('local') {
   async canActivate(context: ExecutionContext): Promise<boolean> {
+    console.log('guard');
     const request = context.switchToHttp().getRequest<Request>();
 
     const loginDto = plainToInstance(LoginDto, request.body);

@@ -17,9 +17,11 @@ export class AuthService {
   ) {}
 
   async login(email: string, password: string): Promise<any> {
+    console.log('service 1');
     const user = await this.prisma.uSERS.findUnique({
-      where: { email },
+      where: { email: email },
     });
+    console.log('service 2', user);
 
     if (!user) {
       throw new NotFoundException('Correo o contraseña incorrectos');

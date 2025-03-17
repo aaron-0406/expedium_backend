@@ -19,7 +19,9 @@ export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
     password: string,
   ): Promise<Omit<UserType, 'password'>> {
     // Utilizamos "any" ya que el método login retorna any
+    console.log('strategy ser');
     const user = (await this.authService.login(email, password)) as UserType;
+    console.log('strategy no ser');
     if (!user) {
       throw new UnauthorizedException('Credenciales inválidas');
     }

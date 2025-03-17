@@ -16,7 +16,9 @@ export class AuthController {
   @HttpCode(200)
   @UseGuards(LocalAuthGuard)
   signIn(@Req() req: Request) {
+    console.log('controller 1');
     const token = this.authService.generateToken(req.user);
+    console.log('controller 2');
     return {
       success: 'Sesión iniciada',
       user: req.user,
