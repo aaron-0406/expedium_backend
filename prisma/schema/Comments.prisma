@@ -1,0 +1,15 @@
+model COMMENTS {
+  id                     String @id @default(uuid())
+  title                  String @db.VarChar(45)
+  description            String @db.LongText
+  image                  String @db.VarChar(45)
+  user_id_user           String
+  post_id_post           String
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now())
+  deleted_at DateTime?
+
+  USERS     USERS          @relation("UserComments", fields: [user_id_user], references: [id])
+  POSTS     POSTS          @relation("PostComments", fields: [post_id_post], references: [id])
+}

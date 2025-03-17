@@ -1,0 +1,281 @@
+-- CreateTable
+CREATE TABLE `COMMENTS` (
+    `id` VARCHAR(191) NOT NULL,
+    `title` VARCHAR(45) NOT NULL,
+    `description` LONGTEXT NOT NULL,
+    `image` VARCHAR(45) NOT NULL,
+    `user_id_user` VARCHAR(191) NOT NULL,
+    `post_id_post` VARCHAR(191) NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `COMMUNITIES` (
+    `id` VARCHAR(191) NOT NULL,
+    `name` VARCHAR(45) NOT NULL,
+    `description` LONGTEXT NOT NULL,
+    `creator_id_creator` VARCHAR(191) NOT NULL,
+    `privacity_id_privacity` INTEGER NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `COMMUNITY_MEMBERS` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `member_id_member` VARCHAR(191) NOT NULL,
+    `role_id_role` VARCHAR(191) NOT NULL,
+    `community_id_community` VARCHAR(191) NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `CONNECTIONS` (
+    `id` VARCHAR(191) NOT NULL,
+    `requesting_user_id_requesting_user` VARCHAR(191) NOT NULL,
+    `requested_user_id_requested_user` VARCHAR(191) NOT NULL,
+    `state_id_state` INTEGER NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `EVENT_ATTENDEES` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `participant_id_participant` VARCHAR(191) NOT NULL,
+    `event_id_event` INTEGER NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `EVENT_TYPE` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(45) NOT NULL,
+    `description` LONGTEXT NOT NULL,
+    `color` VARCHAR(45) NOT NULL,
+    `icon` VARCHAR(45) NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `EVENTS` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(45) NOT NULL,
+    `description` LONGTEXT NOT NULL,
+    `color` VARCHAR(45) NOT NULL,
+    `icon` VARCHAR(45) NOT NULL,
+    `type_id_type` INTEGER NOT NULL,
+    `privacity_id_privacity` INTEGER NOT NULL,
+    `community_id_community` VARCHAR(191) NOT NULL,
+    `creator_id_creator` VARCHAR(191) NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `MESSAGES` (
+    `id` VARCHAR(191) NOT NULL,
+    `content` LONGTEXT NOT NULL,
+    `state_id_state` INTEGER NOT NULL,
+    `sender_id_user` VARCHAR(191) NOT NULL,
+    `receiver_id_user` VARCHAR(191) NOT NULL,
+    `recipent_id_user` VARCHAR(191) NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `POST_TYPE` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(45) NOT NULL,
+    `description` LONGTEXT NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `POSTS` (
+    `id` VARCHAR(191) NOT NULL,
+    `title` VARCHAR(45) NOT NULL,
+    `description` LONGTEXT NOT NULL,
+    `image` VARCHAR(45) NOT NULL,
+    `user_id_user` VARCHAR(191) NOT NULL,
+    `privacity_id_privacity` INTEGER NOT NULL,
+    `type_id_type` INTEGER NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `POSTS_COMMENTS_REACTIONS` (
+    `id` VARCHAR(191) NOT NULL,
+    `type_reaction_id_type_reaction` INTEGER NOT NULL,
+    `user_id_user` VARCHAR(191) NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `PRIVACITY` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(45) NOT NULL,
+    `description` LONGTEXT NOT NULL,
+    `color` VARCHAR(45) NOT NULL,
+    `icon` VARCHAR(45) NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `STATE_CONNECTIONS` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(45) NOT NULL,
+    `description` LONGTEXT NOT NULL,
+    `color` VARCHAR(45) NOT NULL,
+    `icon` VARCHAR(45) NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `STATE_MESSAGES` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(45) NOT NULL,
+    `description` LONGTEXT NOT NULL,
+    `color` VARCHAR(45) NOT NULL,
+    `icon` VARCHAR(45) NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `TYPE_REACTION` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(45) NOT NULL,
+    `description` LONGTEXT NOT NULL,
+    `color` VARCHAR(45) NOT NULL,
+    `icon` VARCHAR(45) NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `deleted_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `COMMENTS` ADD CONSTRAINT `COMMENTS_user_id_user_fkey` FOREIGN KEY (`user_id_user`) REFERENCES `USERS`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `COMMENTS` ADD CONSTRAINT `COMMENTS_post_id_post_fkey` FOREIGN KEY (`post_id_post`) REFERENCES `POSTS`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `COMMUNITIES` ADD CONSTRAINT `COMMUNITIES_privacity_id_privacity_fkey` FOREIGN KEY (`privacity_id_privacity`) REFERENCES `PRIVACITY`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `COMMUNITIES` ADD CONSTRAINT `COMMUNITIES_creator_id_creator_fkey` FOREIGN KEY (`creator_id_creator`) REFERENCES `USERS`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `COMMUNITY_MEMBERS` ADD CONSTRAINT `COMMUNITY_MEMBERS_member_id_member_fkey` FOREIGN KEY (`member_id_member`) REFERENCES `USERS`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `COMMUNITY_MEMBERS` ADD CONSTRAINT `COMMUNITY_MEMBERS_community_id_community_fkey` FOREIGN KEY (`community_id_community`) REFERENCES `COMMUNITIES`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `COMMUNITY_MEMBERS` ADD CONSTRAINT `COMMUNITY_MEMBERS_role_id_role_fkey` FOREIGN KEY (`role_id_role`) REFERENCES `ROLES`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `CONNECTIONS` ADD CONSTRAINT `CONNECTIONS_state_id_state_fkey` FOREIGN KEY (`state_id_state`) REFERENCES `STATE_CONNECTIONS`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `CONNECTIONS` ADD CONSTRAINT `CONNECTIONS_requesting_user_id_requesting_user_fkey` FOREIGN KEY (`requesting_user_id_requesting_user`) REFERENCES `USERS`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `CONNECTIONS` ADD CONSTRAINT `CONNECTIONS_requested_user_id_requested_user_fkey` FOREIGN KEY (`requested_user_id_requested_user`) REFERENCES `USERS`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `EVENT_ATTENDEES` ADD CONSTRAINT `EVENT_ATTENDEES_participant_id_participant_fkey` FOREIGN KEY (`participant_id_participant`) REFERENCES `USERS`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `EVENT_ATTENDEES` ADD CONSTRAINT `EVENT_ATTENDEES_event_id_event_fkey` FOREIGN KEY (`event_id_event`) REFERENCES `EVENTS`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `EVENTS` ADD CONSTRAINT `EVENTS_type_id_type_fkey` FOREIGN KEY (`type_id_type`) REFERENCES `EVENT_TYPE`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `EVENTS` ADD CONSTRAINT `EVENTS_privacity_id_privacity_fkey` FOREIGN KEY (`privacity_id_privacity`) REFERENCES `PRIVACITY`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `EVENTS` ADD CONSTRAINT `EVENTS_community_id_community_fkey` FOREIGN KEY (`community_id_community`) REFERENCES `COMMUNITIES`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `EVENTS` ADD CONSTRAINT `EVENTS_creator_id_creator_fkey` FOREIGN KEY (`creator_id_creator`) REFERENCES `USERS`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `MESSAGES` ADD CONSTRAINT `MESSAGES_state_id_state_fkey` FOREIGN KEY (`state_id_state`) REFERENCES `STATE_MESSAGES`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `MESSAGES` ADD CONSTRAINT `MESSAGES_sender_id_user_fkey` FOREIGN KEY (`sender_id_user`) REFERENCES `USERS`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `MESSAGES` ADD CONSTRAINT `MESSAGES_receiver_id_user_fkey` FOREIGN KEY (`receiver_id_user`) REFERENCES `USERS`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `POSTS` ADD CONSTRAINT `POSTS_user_id_user_fkey` FOREIGN KEY (`user_id_user`) REFERENCES `USERS`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `POSTS` ADD CONSTRAINT `POSTS_privacity_id_privacity_fkey` FOREIGN KEY (`privacity_id_privacity`) REFERENCES `PRIVACITY`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `POSTS` ADD CONSTRAINT `POSTS_type_id_type_fkey` FOREIGN KEY (`type_id_type`) REFERENCES `POST_TYPE`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `POSTS_COMMENTS_REACTIONS` ADD CONSTRAINT `POSTS_COMMENTS_REACTIONS_type_reaction_id_type_reaction_fkey` FOREIGN KEY (`type_reaction_id_type_reaction`) REFERENCES `TYPE_REACTION`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `POSTS_COMMENTS_REACTIONS` ADD CONSTRAINT `POSTS_COMMENTS_REACTIONS_user_id_user_fkey` FOREIGN KEY (`user_id_user`) REFERENCES `USERS`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

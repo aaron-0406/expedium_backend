@@ -1,0 +1,16 @@
+model MESSAGES {
+  id               String @id @default(uuid())
+  content          String @db.LongText
+  state_id_state   Int
+  sender_id_user   String
+  receiver_id_user String
+  recipent_id_user String
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now())
+  deleted_at DateTime?
+
+  STATES   STATE_MESSAGES @relation("StateMessages", fields: [state_id_state], references: [id])
+  SENDER   USERS  @relation("SenderMessages", fields: [sender_id_user], references: [id])
+  RECEIVER USERS  @relation("ReceiverMessages", fields: [receiver_id_user], references: [id])
+}

@@ -1,0 +1,12 @@
+model EVENT_ATTENDEES {
+  id Int @id @default(autoincrement())
+  participant_id_participant String
+  event_id_event Int
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  deleted_at DateTime?
+
+  USERS USERS @relation("UserEventAttendees", fields: [participant_id_participant], references: [id])
+  EVENTS EVENTS @relation("EventAttendees", fields: [event_id_event], references: [id])
+}

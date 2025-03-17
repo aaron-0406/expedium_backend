@@ -1,0 +1,16 @@
+model COMMUNITIES {
+  id                     String @id @default(uuid())
+  name                   String @db.VarChar(45)
+  description            String @db.LongText
+  creator_id_creator     String
+  privacity_id_privacity Int
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now())
+  deleted_at DateTime?
+
+  PRIVACITY PRIVACITY @relation("CommunityPrivacity", fields: [privacity_id_privacity], references: [id])
+  COMMUNITY_MEMBERS   COMMUNITY_MEMBERS[] @relation("CommunitiyMembers")
+  EVENTS              EVENTS[]            @relation("CommunitiyEvents")
+  USERS               USERS          @relation("UserCreatorCommunity", fields: [creator_id_creator], references: [id])
+}
