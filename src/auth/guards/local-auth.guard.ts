@@ -11,15 +11,13 @@ import { LoginDto } from '../dto/auth.dto';
 @Injectable()
 export class LocalAuthGuard extends AuthGuard('local') {
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    console.log('guard');
     const request = context.switchToHttp().getRequest<Request>();
-
     const loginDto = plainToInstance(LoginDto, request.body);
     const errors = await validate(loginDto);
     if (errors.length > 0) {
       throw new UnauthorizedException('Credenciales inválidas');
     }
-
-    return super.canActivate(context) as Promise<boolean>;
+    console.log(super.canActivate(context), 'guard return');
+    return super.canActivate(context) as boolean;
   }
 }

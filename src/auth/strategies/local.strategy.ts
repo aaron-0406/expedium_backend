@@ -10,22 +10,18 @@ export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
     super({
       usernameField: 'email',
       passwordField: 'password',
-      passReqToCallback: true,
     });
   }
-
   async validate(
     email: string,
     password: string,
   ): Promise<Omit<UserType, 'password'>> {
-    // Utilizamos "any" ya que el método login retorna any
-    console.log('strategy ser');
+    console.log('Ejecutando estrategia local...');
     const user = (await this.authService.login(email, password)) as UserType;
-    console.log('strategy no ser');
     if (!user) {
       throw new UnauthorizedException('Credenciales inválidas');
     }
-
+    // Excluimos la propiedad "password" del objeto de usuario
     const { password: _pwd, ...result } = user;
     void _pwd;
     return result as Omit<UserType, 'password'>;

@@ -1,11 +1,19 @@
 // src/auth/auth.controller.ts
-import { Controller, HttpCode, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  Post,
+  UseGuards,
+  ValidationPipe,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 // import { ChangePasswordDto } from './dtos/change-password.dto';
 // import { ChangeCredentialsDto } from './dtos/change-credentials.dto';
 import { LocalAuthGuard } from './guards/local-auth.guard';
+import { LoginDto } from './dto/auth.dto';
 // import { JwtAuthGuard } from './guards/jwt-auth.guard';
-import { Request } from 'express';
+// import { Request } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -15,13 +23,13 @@ export class AuthController {
   @Post('signin')
   @HttpCode(200)
   @UseGuards(LocalAuthGuard)
-  signIn(@Req() req: Request) {
+  signIn(@Body(new ValidationPipe()) loginDto: LoginDto) {
     console.log('controller 1');
-    const token = this.authService.generateToken(req.user);
+    const token = this.authService.generateToken(loginDto);
     console.log('controller 2');
     return {
       success: 'Sesión iniciada',
-      user: req.user,
+      user: loginDto,
       token,
     };
   }
