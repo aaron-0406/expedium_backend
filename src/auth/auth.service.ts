@@ -17,11 +17,9 @@ export class AuthService {
   ) {}
 
   async login(email: string, password: string): Promise<any> {
-    console.log('service 1');
     const user = await this.prisma.uSERS.findUnique({
       where: { email: email },
     });
-    console.log('service 2', user);
 
     if (!user) {
       throw new NotFoundException('Correo o contraseña incorrectos');
@@ -45,10 +43,10 @@ export class AuthService {
     if (newPassword !== repeatPassword) {
       throw new BadRequestException('Las contraseñas no coinciden');
     }
-    const hashed = await encryptPassword(newPassword);
+    const password = await encryptPassword(newPassword);
     await this.prisma.uSERS.update({
       where: { id: userId },
-      data: { password: hashed },
+      data: { password },
     });
   }
 
@@ -75,8 +73,8 @@ export class AuthService {
 
   // Generación del token JWT
   generateToken(user: any): string {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...payload } = user as UserType;
+    void password;
     return this.jwtService.sign(payload);
   }
 }

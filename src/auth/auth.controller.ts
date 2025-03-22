@@ -1,17 +1,8 @@
 // src/auth/auth.controller.ts
-import {
-  Body,
-  Controller,
-  HttpCode,
-  Post,
-  UseGuards,
-  ValidationPipe,
-} from '@nestjs/common';
+import { Req, Controller, HttpCode, Post, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
-// import { ChangePasswordDto } from './dtos/change-password.dto';
-// import { ChangeCredentialsDto } from './dtos/change-credentials.dto';
 import { LocalAuthGuard } from './guards/local-auth.guard';
-import { LoginDto } from './dto/auth.dto';
+import { Request } from 'express';
 // import { JwtAuthGuard } from './guards/jwt-auth.guard';
 // import { Request } from 'express';
 
@@ -23,13 +14,11 @@ export class AuthController {
   @Post('signin')
   @HttpCode(200)
   @UseGuards(LocalAuthGuard)
-  signIn(@Body(new ValidationPipe()) loginDto: LoginDto) {
-    console.log('controller 1');
-    const token = this.authService.generateToken(loginDto);
-    console.log('controller 2');
+  signIn(@Req() req: Request) {
+    const token = this.authService.generateToken(req.user);
     return {
       success: 'Sesión iniciada',
-      user: loginDto,
+      user: req.user,
       token,
     };
   }
@@ -37,7 +26,7 @@ export class AuthController {
   //   // Endpoint para cambiar contraseña
   //   @UseGuards(JwtAuthGuard)
   //   @Post('change-password')
-  //   async changePassword(
+  //   changePassword(
   //     @Req() req: Request,
   //     @Body() changePasswordDto: ChangePasswordDto,
   //   ) {
