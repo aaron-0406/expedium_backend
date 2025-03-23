@@ -50,26 +50,26 @@ export class AuthService {
     });
   }
 
-  async changeCredentials(
-    userId: string,
-    first_name: string,
-    last_name?: string,
-    phone?: string,
-  ): Promise<any> {
-    const user = await this.prisma.uSERS.findUnique({ where: { id: userId } });
-    if (!user) {
-      throw new NotFoundException('Usuario no encontrado');
-    }
+  // async changeCredentials(
+  //   userId: string,
+  //   first_name: string,
+  //   last_name?: string,
+  //   phone?: string,
+  // ): Promise<any> {
+  //   const user = await this.prisma.uSERS.findUnique({ where: { id: userId } });
+  //   if (!user) {
+  //     throw new NotFoundException('Usuario no encontrado');
+  //   }
 
-    const oldUser = { ...user };
+  //   const oldUser = { ...user };
 
-    await this.prisma.uSERS.update({
-      where: { id: userId },
-      data: { first_name, last_name, phone },
-    });
+  //   await this.prisma.uSERS.update({
+  //     where: { id: userId },
+  //     data: { first_name, last_name, phone },
+  //   });
 
-    return oldUser;
-  }
+  //   return oldUser;
+  // }
 
   // Generación del token JWT
   generateToken(user: any): string {

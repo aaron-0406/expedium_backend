@@ -1,10 +1,18 @@
 // src/auth/auth.controller.ts
-import { Req, Controller, HttpCode, Post, UseGuards } from '@nestjs/common';
+import {
+  Req,
+  Body,
+  Controller,
+  HttpCode,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { Request } from 'express';
-// import { JwtAuthGuard } from './guards/jwt-auth.guard';
-// import { Request } from 'express';
+import { ChangePasswordDto } from './dto/auth.dto';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { UserType } from 'src/types/user.type';
 
 @Controller('auth')
 export class AuthController {
@@ -23,26 +31,28 @@ export class AuthController {
     };
   }
 
-  //   // Endpoint para cambiar contraseña
-  //   @UseGuards(JwtAuthGuard)
-  //   @Post('change-password')
-  //   changePassword(
-  //     @Req() req: Request,
-  //     @Body() changePasswordDto: ChangePasswordDto,
-  //   ) {
-  //     const userId = req.user['id'];
-  //     await this.authService.changePassword(
-  //       userId,
-  //       changePasswordDto.newPassword,
-  //       changePasswordDto.repeatPassword,
-  //     );
-  //     return { success: 'Contraseña cambiada correctamente' };
-  //   }
+  // Endpoint para cambiar contraseña
+  @UseGuards(JwtAuthGuard)
+  @Post('change-password')
+  changePassword(
+    @Req() req: Request,
+    @Body() changePasswordDto: ChangePasswordDto,
+  ) {
+    const user = req.user as UserType;
+    console.log('🚀 ~ AuthController ~ userId:', user);
+
+    void this.authService.changePassword(
+      user.id,
+      changePasswordDto.newPassword,
+      changePasswordDto.repeatPassword,
+    );
+    return { success: 'Contraseña cambiada correctamente' };
+  }
 
   //   // Endpoint para actualizar credenciales
   //   @UseGuards(JwtAuthGuard)
   //   @Post('change-credentials')
-  //   async changeCredentials(
+  //   changeCredentials(
   //     @Req() req: Request,
   //     @Body() changeCredentialsDto: ChangeCredentialsDto,
   //   ) {

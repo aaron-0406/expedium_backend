@@ -13,9 +13,9 @@ export class LoginDto {
 export class ChangePasswordDto {
   @IsNotEmpty({ message: 'La contraseña es obligatoria' })
   @IsString({ message: 'La contraseña debe ser una cadena de texto' })
-  password: string;
+  newPassword: string;
 
   @IsNotEmpty({ message: 'La nueva contraseña es obligatoria' })
   @IsString({ message: 'La nueva contraseña debe ser una cadena de texto' })
-  newPassword: string;
+  repeatPassword: string;
 }
