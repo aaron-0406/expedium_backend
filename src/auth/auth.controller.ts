@@ -26,7 +26,7 @@ export class AuthController {
     const token = this.authService.generateToken(req.user);
     return {
       success: 'Sesión iniciada',
-      user: req.user,
+      user: req.user as UserType,
       token,
     };
   }

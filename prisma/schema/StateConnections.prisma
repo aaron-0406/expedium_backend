@@ -1,4 +1,4 @@
-model STATE_CONNECTIONS {
+model state_connections {
   id          Int    @id @default(autoincrement())
   name        String @db.VarChar(45)
   description String @db.LongText
@@ -9,5 +9,6 @@ model STATE_CONNECTIONS {
   updated_at DateTime  @default(now())
   deleted_at DateTime?
 
-  CONNECTIONS CONNECTIONS[] @relation("StateConnections") 
+  CONNECTIONS connections[] @relation("StateConnections")
+  @@map("STATE_CONNECTIONS")
 }

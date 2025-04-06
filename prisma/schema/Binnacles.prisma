@@ -1,4 +1,4 @@
-model BINNACLES {
+model binnacles {
   id                     Int      @id @default(autoincrement())
   last_performed         String   @db.LongText
   case_file_id_case_file Int
@@ -17,6 +17,8 @@ model BINNACLES {
   updated_at DateTime  @default(now())
   deleted_at DateTime?
 
-  CASE_FILES            CASE_FILES              @relation(fields: [case_file_id_case_file], references: [id])
-  BINNACLE_NOTIFICATION BINNACLE_NOTIFICATION[]
+  CASE_FILES            caseFiles               @relation(fields: [case_file_id_case_file], references: [id])
+  BINNACLE_NOTIFICATION binnacle_notification[]
+
+  @@map("BINNACLES")
 }

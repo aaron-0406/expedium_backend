@@ -1,4 +1,4 @@
-model PRIVACITY {
+model privacity {
   id          Int    @id @default(autoincrement())
   name        String @db.VarChar(45)
   description String @db.LongText
@@ -9,7 +9,9 @@ model PRIVACITY {
   updated_at DateTime  @default(now())
   deleted_at DateTime?
 
-  POSTS POSTS[] @relation("PostPrivacity")
-  EVENTS EVENTS[] @relation("EventPrivacity")
-  COMMUNITIES COMMUNITIES[] @relation("CommunityPrivacity")
+  POSTS       posts[]       @relation("PostPrivacity")
+  EVENTS      events[]      @relation("EventPrivacity")
+  COMMUNITIES communities[] @relation("CommunityPrivacity")
+
+  @@map("PRIVACITY")
 }

@@ -1,10 +1,12 @@
-model PLANS_PERMISSIONS {
+model plans_permissions {
   id                       Int         @id @default(autoincrement())
   permission_id_permission Int
   plan_id_plan             Int
-  PERMISSIONS              PERMISSIONS @relation(fields: [permission_id_permission], references: [id])
-  PLANS                    PLANS       @relation(fields: [plan_id_plan], references: [id])
+  PERMISSIONS              permissions @relation(fields: [permission_id_permission], references: [id])
+  PLANS                    plans       @relation(fields: [plan_id_plan], references: [id])
   created_at               DateTime    @default(now())
   updated_at               DateTime    @default(now())
   deleted_at               DateTime?
+
+  @@map("PLANS_PERMISSIONS")
 }

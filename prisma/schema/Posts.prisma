@@ -1,4 +1,4 @@
-model POSTS {
+model posts {
   id                     String @id @default(uuid())
   title                  String @db.VarChar(45)
   description            String @db.LongText
@@ -11,8 +11,10 @@ model POSTS {
   updated_at DateTime  @default(now())
   deleted_at DateTime?
 
-  USERS     USERS          @relation("UserPosts", fields: [user_id_user], references: [id])
-  PRIVACITY PRIVACITY @relation("PostPrivacity", fields: [privacity_id_privacity], references: [id])
-  TYPE      POST_TYPE      @relation("PostType", fields: [type_id_type], references: [id])
-  COMMENTS  COMMENTS[]     @relation("PostComments")
+  USERS     users      @relation("UserPosts", fields: [user_id_user], references: [id])
+  PRIVACITY privacity  @relation("PostPrivacity", fields: [privacity_id_privacity], references: [id])
+  TYPE      post_type  @relation("PostType", fields: [type_id_type], references: [id])
+  COMMENTS  comments[] @relation("PostComments")
+
+  @@map("POSTS")
 }

@@ -1,4 +1,4 @@
-model POSTS_COMMENTS_REACTIONS {
+model posts_comments_reactions {
   id                             String @id @default(uuid())
   type_reaction_id_type_reaction Int
   user_id_user                   String
@@ -7,6 +7,8 @@ model POSTS_COMMENTS_REACTIONS {
   updated_at DateTime  @default(now())
   deleted_at DateTime?
 
-  TYPE_REACTION TYPE_REACTION @relation("TypeReaction", fields: [type_reaction_id_type_reaction], references: [id])
-  USERS         USERS         @relation("UserReactions", fields: [user_id_user], references: [id])
+  TYPE_REACTION type_reaction @relation("TypeReaction", fields: [type_reaction_id_type_reaction], references: [id])
+  USERS         users         @relation("UserReactions", fields: [user_id_user], references: [id])
+
+  @@map("POSTS_COMMENTS_REACTIONS")
 }

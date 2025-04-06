@@ -1,4 +1,4 @@
-model COMMUNITIES {
+model communities {
   id                     String @id @default(uuid())
   name                   String @db.VarChar(45)
   description            String @db.LongText
@@ -9,8 +9,11 @@ model COMMUNITIES {
   updated_at DateTime  @default(now())
   deleted_at DateTime?
 
-  PRIVACITY PRIVACITY @relation("CommunityPrivacity", fields: [privacity_id_privacity], references: [id])
-  COMMUNITY_MEMBERS   COMMUNITY_MEMBERS[] @relation("CommunitiyMembers")
-  EVENTS              EVENTS[]            @relation("CommunitiyEvents")
-  USERS               USERS          @relation("UserCreatorCommunity", fields: [creator_id_creator], references: [id])
+  PRIVACITY         privacity           @relation("CommunityPrivacity", fields: [privacity_id_privacity], references: [id])
+  COMMUNITY_MEMBERS community_members[] @relation("CommunitiyMembers")
+  EVENTS            events[]            @relation("CommunitiyEvents")
+  USERS             users               @relation("UserCreatorCommunity", fields: [creator_id_creator], references: [id])
+  privacityId       Int?
+
+  @@map("COMMUNITIES")
 }

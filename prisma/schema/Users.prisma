@@ -1,4 +1,4 @@
-model USERS {
+model users {
   id           String  @id @default(uuid())
   first_name   String
   last_name    String?
@@ -15,26 +15,28 @@ model USERS {
   updated_at DateTime?
   deleted_at DateTime?
 
-  PLANS PLANS? @relation(fields: [plan_id_plan], references: [id])
-  ROLES ROLES? @relation(fields: [rol_id], references: [id])
+  PLANS plans? @relation(fields: [plan_id_plan], references: [id])
+  ROLES roles? @relation(fields: [rol_id], references: [id])
 
-  GROUPS                GROUPS[]
-  USER_GROUPS           USER_GROUPS[]
-  USER_GROUP_CASE_FILES USER_GROUP_CASE_FILES[]
+  GROUPS                groups[]
+  USER_GROUPS           user_groups[]
+  USER_GROUP_CASE_FILES user_group_case_files[]
 
-  MESSAGES_SENT     MESSAGES[] @relation("SenderMessages")
-  MESSAGES_RECEIVED MESSAGES[] @relation("ReceiverMessages")
+  MESSAGES_SENT     messages[] @relation("SenderMessages")
+  MESSAGES_RECEIVED messages[] @relation("ReceiverMessages")
 
-  CONNECTIONS_REQUESTED  CONNECTIONS[] @relation("RequestedUsers")
-  CONNECTIONS_REQUESTING CONNECTIONS[] @relation("RequestingUsers")
+  CONNECTIONS_REQUESTED  connections[] @relation("RequestedUsers")
+  CONNECTIONS_REQUESTING connections[] @relation("RequestingUsers")
 
-  REACTIONS POSTS_COMMENTS_REACTIONS[] @relation("UserReactions")
-  POSTS     POSTS[]                    @relation("UserPosts")
-  COMMENTS  COMMENTS[]                 @relation("UserComments")
+  REACTIONS posts_comments_reactions[] @relation("UserReactions")
+  POSTS     posts[]                    @relation("UserPosts")
+  COMMENTS  comments[]                 @relation("UserComments")
 
-  COMMUNITY_MEMBERS COMMUNITY_MEMBERS[] @relation("Members")
-  COMMUNITIES       COMMUNITIES[]       @relation("UserCreatorCommunity")
+  COMMUNITY_MEMBERS community_members[] @relation("Members")
+  COMMUNITIES       communities[]       @relation("UserCreatorCommunity")
 
-  EVENTS          EVENTS[]          @relation("UserCreator")
-  EVENT_ATTENDEES EVENT_ATTENDEES[] @relation("UserEventAttendees")
+  EVENTS          events[]          @relation("UserCreator")
+  EVENT_ATTENDEES event_attendees[] @relation("UserEventAttendees")
+
+  @@map("USERS")
 }

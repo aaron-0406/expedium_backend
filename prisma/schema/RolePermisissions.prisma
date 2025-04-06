@@ -1,10 +1,12 @@
-model ROLE_PERMISSION {
+model role_permissions {
   id            Int         @id @default(autoincrement())
   rol_id        String
   permission_id Int
-  ROLES         ROLES       @relation(fields: [rol_id], references: [id])
-  PERMISSIONS   PERMISSIONS @relation(fields: [permission_id], references: [id])
+  ROLES         roles       @relation(fields: [rol_id], references: [id])
+  PERMISSIONS   permissions @relation(fields: [permission_id], references: [id])
   created_at    DateTime?   @default(now())
   updated_at    DateTime?
   deleted_at    DateTime?
+
+  @@map("ROLE_PERMISSION")
 }

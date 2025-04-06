@@ -1,4 +1,4 @@
-model STATE_MESSAGES {
+model state_messages {
   id          Int    @id @default(autoincrement())
   name        String @db.VarChar(45)
   description String @db.LongText
@@ -9,5 +9,7 @@ model STATE_MESSAGES {
   updated_at DateTime  @default(now())
   deleted_at DateTime?
 
-  MESSAGES MESSAGES[] @relation("StateMessages")
+  MESSAGES messages[] @relation("StateMessages")
+
+  @@map("STATE_MESSAGES")
 }

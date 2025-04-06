@@ -1,4 +1,4 @@
-model GROUPS {
+model groups {
   id           Int       @id @default(autoincrement())
   user_id_user String
   name         String
@@ -7,7 +7,9 @@ model GROUPS {
   updated_at   DateTime  @default(now())
   deleted_at   DateTime?
 
-  user                  USERS                   @relation(fields: [user_id_user], references: [id])
-  USER_GROUPS           USER_GROUPS[]
-  USER_GROUP_CASE_FILES USER_GROUP_CASE_FILES[]
+  user                  users                   @relation(fields: [user_id_user], references: [id])
+  USER_GROUPS           user_groups[]
+  USER_GROUP_CASE_FILES user_group_case_files[]
+
+  @@map("GROUPS")
 }

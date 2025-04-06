@@ -1,15 +1,16 @@
-model ROLES {
-  id              String            @id @default(uuid())
-  name            String?
-  description     String?
-  icon            String?
-  USERS           USERS[]
-  PERMISSIONS     PERMISSIONS[]
+model roles {
+  id          String        @id @default(uuid())
+  name        String?
+  description String?
+  icon        String?
+  USERS       users[]
+  PERMISSIONS permissions[]
+  created_at  DateTime?     @default(now())
+  updated_at  DateTime?
+  deleted_at  DateTime?
 
-  created_at      DateTime?         @default(now())
-  updated_at      DateTime?
-  deleted_at      DateTime?
+  ROLE_PERMISSION   role_permissions[]
+  COMMUNITY_MEMBERS community_members[] @relation("CommunityMembersRoles")
 
-  ROLE_PERMISSION ROLE_PERMISSION[]
-  COMMUNITY_MEMBERS COMMUNITY_MEMBERS[] @relation("CommunityMembersRoles")
+  @@map("ROLES")
 }

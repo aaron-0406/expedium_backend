@@ -1,4 +1,4 @@
-model EVENT_TYPE {
+model event_type {
   id          Int    @id @default(autoincrement())
   name        String @db.VarChar(45)
   description String @db.LongText
@@ -9,6 +9,7 @@ model EVENT_TYPE {
   updated_at DateTime  @default(now())
   deleted_at DateTime?
 
-  EVENTS EVENTS[] @relation("EventType")
+  EVENTS events[] @relation("EventType")
 
+  @@map("EVENT_TYPE")
 }

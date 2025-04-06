@@ -1,4 +1,4 @@
-model MESSAGES {
+model messages {
   id               String @id @default(uuid())
   content          String @db.LongText
   state_id_state   Int
@@ -10,7 +10,9 @@ model MESSAGES {
   updated_at DateTime  @default(now())
   deleted_at DateTime?
 
-  STATES   STATE_MESSAGES @relation("StateMessages", fields: [state_id_state], references: [id])
-  SENDER   USERS  @relation("SenderMessages", fields: [sender_id_user], references: [id])
-  RECEIVER USERS  @relation("ReceiverMessages", fields: [receiver_id_user], references: [id])
+  STATES   state_messages @relation("StateMessages", fields: [state_id_state], references: [id])
+  SENDER   users          @relation("SenderMessages", fields: [sender_id_user], references: [id])
+  RECEIVER users          @relation("ReceiverMessages", fields: [receiver_id_user], references: [id])
+
+  @@map("MESSAGES")
 }

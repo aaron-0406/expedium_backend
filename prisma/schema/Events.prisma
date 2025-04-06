@@ -1,4 +1,4 @@
-model EVENTS {
+model events {
   id                     Int    @id @default(autoincrement())
   name                   String @db.VarChar(45)
   description            String @db.LongText
@@ -13,9 +13,11 @@ model EVENTS {
   updated_at DateTime  @default(now())
   deleted_at DateTime?
 
-  EVENT_TYPE      EVENT_TYPE        @relation("EventType", fields: [type_id_type], references: [id])
-  PRIVACITY       PRIVACITY         @relation("EventPrivacity", fields: [privacity_id_privacity], references: [id])
-  COMMUNITIES     COMMUNITIES       @relation("CommunitiyEvents", fields: [community_id_community], references: [id])
-  USERS           USERS             @relation("UserCreator", fields: [creator_id_creator], references: [id])
-  EVENT_ATTENDEES EVENT_ATTENDEES[] @relation("EventAttendees")
+  EVENT_TYPE      event_type        @relation("EventType", fields: [type_id_type], references: [id])
+  PRIVACITY       privacity         @relation("EventPrivacity", fields: [privacity_id_privacity], references: [id])
+  COMMUNITIES     communities       @relation("CommunitiyEvents", fields: [community_id_community], references: [id])
+  USERS           users             @relation("UserCreator", fields: [creator_id_creator], references: [id])
+  EVENT_ATTENDEES event_attendees[] @relation("EventAttendees")
+
+  @@map("EVENTS")
 }

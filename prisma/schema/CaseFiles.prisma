@@ -1,4 +1,4 @@
-model CASE_FILES {
+model caseFiles {
   id                  Int      @id @default(autoincrement())
   code                String   @db.VarChar(45)
   jurisdictional_body String   @db.VarChar(45)
@@ -21,6 +21,8 @@ model CASE_FILES {
   updated_at DateTime  @default(now())
   deleted_at DateTime?
 
-  USER_GROUP_CASE_FILES USER_GROUP_CASE_FILES[]
-  BINNACLES             BINNACLES[]
+  USER_GROUP_CASE_FILES user_group_case_files[]
+  BINNACLES             binnacles[]
+
+  @@map("CASE_FILES")
 }

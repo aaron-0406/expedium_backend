@@ -13,11 +13,11 @@ import { UserType } from 'src/types/user.type';
 export class AuthService {
   constructor(
     private prisma: PrismaService,
-    private jwtService: JwtService,
+    private readonly jwtService: JwtService,
   ) {}
 
   async login(email: string, password: string): Promise<any> {
-    const user = await this.prisma.uSERS.findUnique({
+    const user = await this.prisma.users.findUnique({
       where: { email: email },
     });
 
@@ -44,7 +44,7 @@ export class AuthService {
       throw new BadRequestException('Las contraseñas no coinciden');
     }
     const password = await encryptPassword(newPassword);
-    await this.prisma.uSERS.update({
+    await this.prisma.users.update({
       where: { id: userId },
       data: { password },
     });
@@ -75,6 +75,6 @@ export class AuthService {
   generateToken(user: any): string {
     const { password, ...payload } = user as UserType;
     void password;
-    return this.jwtService.sign(payload);
+    return this.jwtService?.sign(payload) ?? '';
   }
 }

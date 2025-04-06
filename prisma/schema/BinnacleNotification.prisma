@@ -1,4 +1,4 @@
-model BINNACLE_NOTIFICATION {
+model binnacle_notification {
   id                           Int      @id @default(autoincrement())
   binnacle_id_binnacle         Int
   notification_code            String   @db.VarChar(45)
@@ -17,5 +17,7 @@ model BINNACLE_NOTIFICATION {
   updated_at DateTime  @default(now())
   deleted_at DateTime?
 
-  BINNACLES BINNACLES @relation(fields: [binnacle_id_binnacle], references: [id])
+  BINNACLES binnacles @relation(fields: [binnacle_id_binnacle], references: [id])
+
+  @@map("BINNACLE_NOTIFICATION")
 }

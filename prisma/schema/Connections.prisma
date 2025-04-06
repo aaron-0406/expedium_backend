@@ -1,4 +1,4 @@
-model CONNECTIONS {
+model connections {
   id                                 String @id @default(uuid())
   requesting_user_id_requesting_user String
   requested_user_id_requested_user   String
@@ -8,7 +8,9 @@ model CONNECTIONS {
   updated_at DateTime  @default(now())
   deleted_at DateTime?
 
-  STATE_CONNECTIONS STATE_CONNECTIONS @relation("StateConnections", fields: [state_id_state], references: [id])
-  REQUESTING_USERS  USERS             @relation("RequestingUsers", fields: [requesting_user_id_requesting_user], references: [id])
-  REQUESTED_USERS   USERS             @relation("RequestedUsers", fields: [requested_user_id_requested_user], references: [id])
+  STATE_CONNECTIONS state_connections @relation("StateConnections", fields: [state_id_state], references: [id])
+  REQUESTING_USERS  users             @relation("RequestingUsers", fields: [requesting_user_id_requesting_user], references: [id])
+  REQUESTED_USERS   users             @relation("RequestedUsers", fields: [requested_user_id_requested_user], references: [id])
+
+  @@map("CONNECTIONS")
 }

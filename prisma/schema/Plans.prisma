@@ -1,13 +1,15 @@
-model PLANS {
-  id        Int      @id @default(autoincrement())
-  name      String?
-  price     Float?
+model plans {
+  id          Int     @id @default(autoincrement())
+  name        String?
+  price       Float?
   description String?
-  
+
   created_at DateTime? @default(now())
   deleted_at DateTime?
   updated_at DateTime?
-  
-  USERS     USERS[]
-  PLANS_PERMISSIONS PLANS_PERMISSIONS[]
+
+  USERS             users[]
+  PLANS_PERMISSIONS plans_permissions[]
+
+  @@map("PLANS")
 }

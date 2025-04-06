@@ -1,13 +1,14 @@
-model TYPE_REACTION {
-  id Int @id @default(autoincrement())
-  name String @db.VarChar(45)
+model type_reaction {
+  id          Int    @id @default(autoincrement())
+  name        String @db.VarChar(45)
   description String @db.LongText
-  color String @db.VarChar(45)
-  icon String @db.VarChar(45)
+  color       String @db.VarChar(45)
+  icon        String @db.VarChar(45)
 
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now())
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now())
   deleted_at DateTime?
 
-  POSTS_COMMENTS_REACTIONS POSTS_COMMENTS_REACTIONS[] @relation("TypeReaction")
+  POSTS_COMMENTS_REACTIONS posts_comments_reactions[] @relation("TypeReaction")
+  @@map("TYPE_REACTION")
 }

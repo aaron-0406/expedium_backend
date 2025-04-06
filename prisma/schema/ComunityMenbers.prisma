@@ -1,14 +1,16 @@
-model COMMUNITY_MEMBERS {
-  id Int @id @default(autoincrement())
-  member_id_member String
-  role_id_role String
+model community_members {
+  id                     Int    @id @default(autoincrement())
+  member_id_member       String
+  role_id_role           String
   community_id_community String
 
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now())
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now())
   deleted_at DateTime?
 
-  MEMBERS USERS @relation("Members", fields: [member_id_member], references: [id])
-  COMMUNITIES COMMUNITIES @relation("CommunitiyMembers", fields: [community_id_community], references: [id])
-  ROLES ROLES @relation("CommunityMembersRoles", fields: [role_id_role], references: [id])
+  MEMBERS     users       @relation("Members", fields: [member_id_member], references: [id])
+  COMMUNITIES communities @relation("CommunitiyMembers", fields: [community_id_community], references: [id])
+  ROLES       roles       @relation("CommunityMembersRoles", fields: [role_id_role], references: [id])
+
+  @@map("COMMUNITY_MEMBERS")
 }
