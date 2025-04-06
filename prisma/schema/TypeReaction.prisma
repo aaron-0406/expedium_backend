@@ -10,5 +10,6 @@ model type_reaction {
   deleted_at DateTime?
 
   POSTS_COMMENTS_REACTIONS posts_comments_reactions[] @relation("TypeReaction")
+
   @@map("TYPE_REACTION")
 }

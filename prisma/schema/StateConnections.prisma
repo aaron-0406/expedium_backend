@@ -10,5 +10,6 @@ model state_connections {
   deleted_at DateTime?
 
   CONNECTIONS connections[] @relation("StateConnections")
+
   @@map("STATE_CONNECTIONS")
 }
